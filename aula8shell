@@ -169,7 +169,7 @@ clear
 		saida="sim"
 	else
 		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
-		echo "Escolar uma das OPÇÕES"
+		echo "Escolha uma das OPÇÕES" #Erro de português/ concertado
 		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
 	fi
 done ;;
