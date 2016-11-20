@@ -1,0 +1,212 @@
+#!/bin/bash
+
+
+#############################################
+# UNIPÊ Centro Universitário de João Pessoa #
+# Aluno: Jefferson Felix Gomes              #
+# Matrícula: 1510010879                     #
+# Email: jeffersonfelix15@hotmail.com       #
+#############################################
+
+
+# Menu principal
+num1=( )
+nom1=( )
+saidaaa="nao"
+until	[ $saidaaa = "sim" ]
+do
+clear
+echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+echo "¨ Bem vindo ao meu Script               ¨"
+echo "¨ Escolha uma das opções abaixo         ¨"
+echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+echo 
+echo "[1] Cadastrar nome e número de telefone."
+echo "[2] Buscar."
+echo "[3] Listar nomes e números."
+echo "[4] Sair."
+
+echo -n "-- Digite a sua opção: "
+read opcao
+case $opcao in
+	
+1)
+	saida="não" 
+	until [ $saida = "sim" ] #Usando o until para o tratamento da saída
+	do
+
+		clear
+		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+		echo "¨Bem vindo ao menu de CADASTROS¨"
+		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+		echo
+		echo "[1] Cadastrar."
+		echo "[2] sair."
+		
+		echo -n "-- Digite a sua opção: "
+		read cadastrando
+		
+		if [ $cadastrando -eq 1 ] 
+		then
+	
+			saidaa="nao"
+			while [ $saidaa = "nao" ]
+			do
+				echo
+				echo -n "-- Nome: "
+				read nom
+				echo -n "-- Telefone: "
+				read tel
+				if [ -z $nom ] || [ -z $tel ] #Tratamento de variáveis nulas
+				
+				then
+				echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+				echo "¨ Digite os campos obrigatórios        ¨"
+				echo "¨ Para o script funcionar corretamente ¨"
+				echo "¨ Ex:                                  ¨"
+				echo "¨ Nome: José                           ¨"
+				echo "¨ Tel: 933333333                       ¨"
+				echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+				
+				else
+					nom1+=( "$nom" )
+					num1=( "$tel" )
+					saidaa="sim"
+					clear
+					echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+					echo "¨ Cadastro feito com sucesso! ¨"
+					echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+					sleep 2
+					
+		
+				fi
+			done
+		elif [ $cadastrando -eq 2 ]
+		then
+			saida="sim"
+		else
+			clear
+			echo	"Escolha uma das opções"
+			echo
+		fi
+
+		
+
+		done ;;
+
+2)
+saida="nao"
+until [ $saida = "sim" ]
+do
+clear
+	echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+	echo "¨ Bem vindo ao menu de BUSCA ¨"
+	echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+	echo
+	echo "[1] -- Nome: "
+	echo "[2] -- Telefone: "
+	echo "[3] -- Sair: "
+	echo -n "Digite a sua opção: "	
+	read opca
+	
+
+	nome_enc="vazio"
+	tel_enc="vazio"
+	if [ $opca -eq 1 ]
+	then
+		echo -n "Digite o nome: "
+		read bus
+		for (( count = 0; count <= ${#nom1[@]}; count++ )) #Usando o for para verificar os arrays
+								   #E inserindo seu conteúdo em outra variável	
+		do
+			if [ "$bus" = "${nom1[count]}" ]
+
+			then
+				nome_enc=${nom1[count]}
+				tel_enc=${num1[count]}
+			fi
+		
+		done
+
+		if [ $nome_enc = "vazio" ] && [ $tel_enc = "vazio" ] #Tratamento caso as variaveis continuem com o mesmo valor
+		then
+			echo "Não foi possivel encontrar o contato"
+			echo
+			sleep 1
+		else
+			echo "¨¨ Encontrado! ¨¨"         #Exibe caso encontre 
+			echo $nome_enc
+			echo $tel_enc
+			echo 
+			sleep 2
+		fi
+	elif [ $opca = 2 ]
+	then
+		echo -n "Digite o telefone: "
+		read buss
+		for (( count = 0; count <= ${#num1[@]}; count++ ))
+		do	
+			if [ "$buss" = "${num1[count]}" ]
+			then
+				nome_enc=${nom1[count]}
+				tel_enc=${num1[count]}
+			fi
+		 
+		done
+		
+		if [ $nome_enc = "vazio" ] && [ tel_enc = "vazio" ]
+		then
+			echo "Nome e telefone não encontrados"
+			sleep 2
+		else
+			echo "Encontrado!"
+			echo "$nome_enc"
+			echo "$tel_enc"
+			sleep 2
+		fi
+	elif [ $opca -eq 3 ]
+	then
+		saida="sim"
+	else
+		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+		echo "Escolar uma das OPÇÕES"
+		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+	fi
+done ;;
+
+3)
+saida="não"
+	until [ $saida = "sim" ]
+	do
+		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+		echo "¨ Listar Contatos ¨"
+		echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+		echo 
+		echo "[1] --Listar"
+		echo "[2] --Sair"
+		read opcaa
+		
+		if [ $opcaa -eq 1 ]
+		then
+			count=0
+			for lis	in ${nom1[*]};
+			do
+				echo $lis
+				echo ${num1[count]}
+				(( count+=1 ))
+			done
+		elif [ $opcaa -eq 2 ]
+		then
+			saida="sim"
+		else
+			echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+			echo "Digite uma das OPÇÕES"
+			echo "¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨"
+		fi
+	done ;;
+
+4)
+saidaaa="sim" ;;
+
+esac
+done
